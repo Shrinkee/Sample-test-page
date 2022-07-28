@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<h2>Using the XMLHttpRequest Object</h2>
+		<div id = "sheesh">
+			<button type="button" onclick="loadXMLDoc()">Change Content
+			</button>
+		</div>
+	</body>
+	<script>
+		function loadXMLDoc(){
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("GET", "plant_catalog.xml",true);
+		xhttp.send();
+		xhttp.onreadystatechange = function()
+			{
+				tableXML(this);
+			};
+		}
+
+
+		function tableXML(xml) {
+            var receiver, xmlDoc, txt, idx;
+            xmlDoc = xml.responseXML;
+            txt = "";
+            receiver = xmlDoc.getElementsByTagName("COMMON");
+
+            for(idx = 0; idx < receiver.length; idx++){
+                txt += receiver[idx].childNodes[0].nodeValue + "<br>";
+            }
+            document.getElementById("sheesh").innerHTML = txt;
+        } 
+	</script>
+	
+</html>
